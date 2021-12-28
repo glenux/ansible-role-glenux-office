@@ -1,0 +1,86 @@
+---
+- name: Install communication tools
+  apt:
+    name:
+      - telegram-desktop
+      - thunderbird
+      - thunderbird-l10n-fr
+    state: present
+
+- name: Install Signal
+  block:
+    - name: Add Signal GPG key
+      ansible.builtin.apt_key:
+        #id: 
+        url: https://updates.signal.org/desktop/apt/keys.asc
+        keyring: /etc/apt/trusted.gpg.d/signal-desktop-keyring.gpg 
+
+    - name: Add Signal repository
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main 
+        state: present
+        filename: signal-desktop
+
+    - name: Install Signal package
+      ansible.builtin.apt:
+        name: signal-desktop
+        state: present
+
+- name: Install Skype
+  block:
+    - name: Add Skype APT Key
+      ansible.builtin.apt_key:
+        url: https://repo.skype.com/data/SKYPE-GPG-KEY
+        state: present
+
+    - name: Install Skype stable repository
+      apt_repository:
+        repo: 'deb [arch=amd64] https://repo.skype.com/deb stable main'
+        state: present
+        filename: skype-stable.list
+
+    - name: Install Skype unstable repository
+      apt_repository:
+        repo: 'deb [arch=amd64] https://repo.skype.com/deb unstable main'
+        state: present
+        filename: skype-unstable.list
+
+    - name: Install Skype package
+      apt:
+        name:
+          - skypeforlinux
+        state: present
+
+- name: Install Slack
+  block:
+    - name: "Download libindicator3-7 for Slack (obsolete dependency)"
+      get_url: 
+        url: http://ftp.us.debian.org/debian/pool/main/libi/libindicator/libindicator3-7_0.5.0-4_amd64.deb
+        dest: /usr/src/libindicator3-7_0.5.0-4_amd64.deb
+
+    - name: "Download libappindicator3 for Slack (obsolete dependency)"
+      get_url: 
+        url: http://ftp.us.debian.org/debian/pool/main/liba/libappindicator/libappindicator3-1_0.4.92-7_amd64.deb
+        dest: /usr/src/libappindicator3-1_0.4.92-7_amd64.deb
+
+    - name: Download Slack
+      get_url:
+        url: https://downloads.slack-edge.com/releases/linux/4.23.0/prod/x64/slack-desktop-4.23.0-amd64.deb
+        dest: /usr/src/slack_desktop_amd64.deb
+
+    - name: Install Slack dependency libindicator3-7
+      apt:
+        deb: /usr/src/libindicator3-7_0.5.0-4_amd64.deb
+        state: present
+
+    - name: Install Slack dependency libappindicator3
+      apt:
+        deb: /usr/src/libappindicator3-1_0.4.92-7_amd64.deb
+        state: present
+
+    - name: Install Slack
+      apt:
+        deb: /usr/src/slack_desktop_amd64.deb
+        state: present
+
+

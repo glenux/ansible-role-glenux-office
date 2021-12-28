@@ -1,0 +1,9 @@
+---
+- name: Install 3d tools
+  apt:
+    name:
+      - wings3d
+      - blender
+      - makehuman-community
+    state: present
+

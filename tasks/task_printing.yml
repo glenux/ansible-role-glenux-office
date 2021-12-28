@@ -1,0 +1,12 @@
+---
+- name: Install cups
+  apt:
+    name:
+      - cups
+      - cups-client
+      - hpijs-ppds
+      - hplip
+      - printer-driver-cups-pdf
+      - printer-driver-hpijs
+    state: present
+

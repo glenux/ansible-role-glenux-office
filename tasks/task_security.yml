@@ -1,0 +1,7 @@
+---
+- name: Install other tools
+  apt:
+    name:
+      - keepassxc
+      - kpcli
+    state: present

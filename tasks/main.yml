@@ -1,0 +1,22 @@
+---
+# tasks file for roles/glenux.role_office
+
+- include_tasks: task_desktop.yml
+- include_tasks: task_printing.yml
+- include_tasks: task_writing.yml
+- include_tasks: task_web.yml
+- include_tasks: task_image2d.yml
+- include_tasks: task_pdf.yml
+- include_tasks: task_image3d.yml
+- include_tasks: task_multimedia.yml
+- include_tasks: task_cloud.yml
+- include_tasks: task_communication.yml
+- include_tasks: task_security.yml
+- include_tasks: task_maintenance.yml
+
+- name: Install other tools
+  apt:
+    name:
+      - gramps
+    state: present
+#

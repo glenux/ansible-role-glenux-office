@@ -1,0 +1,10 @@
+---
+- name: Install pdf manipulation tools
+  apt:
+    name:
+      - okular
+      - okular-extra-backends
+      - pdftk
+      - pandoc
+      - xournal
+    state: present

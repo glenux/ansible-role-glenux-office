@@ -1,0 +1,16 @@
+---
+- name: Install desktop environment
+  apt:
+    name:
+      - task-kde-desktop
+      - task-french-kde-desktop
+      - sddm-theme-breeze
+      - kde-config-sddm
+    state: present
+
+- name: Remove unwanted desktop environment
+  apt:
+    name:
+      - lightdm
+      - gdm3
+    state: absent

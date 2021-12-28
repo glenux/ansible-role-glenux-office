@@ -1,0 +1,13 @@
+---
+- name: Install web browsing tools and plugins
+  apt:
+    name:
+      - firefox
+      - firefox-l10n-fr
+      - firefox-l10n-el
+      - chromium
+      - chromium-l10n
+      - webext-ublock-origin-chromium
+      - webext-ublock-origin-firefox
+      - w3m
+    state: present

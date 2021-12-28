@@ -1,0 +1,10 @@
+---
+- name: Install multimedia tools
+  apt:
+    name:
+      - vlc
+      - mpv
+      - peek
+      - obs-studio
+    state: present
+

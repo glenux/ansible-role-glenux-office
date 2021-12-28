@@ -1,0 +1,10 @@
+---
+- name: Install writing tools
+  apt:
+    name:
+      - libreoffice
+      - ghostwriter
+      - lyx
+      - featherpad
+    state: present
+

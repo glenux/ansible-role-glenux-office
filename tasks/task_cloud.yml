@@ -1,0 +1,8 @@
+---
+- name: Install cloud environment
+  apt:
+    name:
+      - nextcloud-desktop
+      - dolphin-nextcloud
+    state: present
+
